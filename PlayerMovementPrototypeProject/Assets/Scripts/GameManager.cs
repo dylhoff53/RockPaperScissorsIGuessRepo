@@ -16,6 +16,17 @@ public class GameManager : MonoBehaviour
     public int playerChoice;
     public int botChoice;
     public int result = 3;
+    public int[] loop;
+    public int count = 0;
+
+    public void Awake()
+    {
+        loop = new int[15];
+        for(int i = 0; i < 15; i++)
+        {
+            loop[i] = i;
+        }
+    }
 
     public void OnStartButton()
     {
@@ -25,48 +36,156 @@ public class GameManager : MonoBehaviour
 
     public void OnRockButton()
     {
-        playerChoice = 1;
         combatMenu.SetActive(false);
         pendingMenu.SetActive(true);
-        Invoke("Results", 3.0f);
+        playerChoice = 0;
         BotAttack();
     }
     public void OnPaperButton()
     {
-        playerChoice = 2;
         combatMenu.SetActive(false);
         pendingMenu.SetActive(true);
-        Invoke("Results", 3.0f);
+        playerChoice = 8;
         BotAttack();
     }
     public void OnScissorsButton()
     {
-        playerChoice = 3;
         combatMenu.SetActive(false);
         pendingMenu.SetActive(true);
-        Invoke("Results", 3.0f);
+        playerChoice = 2;
         BotAttack();
     }
 
+    public void OnFireButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 1;
+        BotAttack();
+    }
+
+    public void OnSnakeButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 3;
+        BotAttack();
+    }
+
+    public void OnHumanButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 4;
+        BotAttack();
+    }
+
+    public void OnTreeButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 5;
+        BotAttack();
+    }
+
+    public void OnWolfButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 6;
+        BotAttack();
+    }
+
+    public void OnSpongeButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 7;
+        BotAttack();
+    }
+
+    public void OnAirButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 9;
+        BotAttack();
+    }
+
+    public void OnWaterButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 10;
+        BotAttack();
+    }
+
+    public void OnDragonButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 11;
+        BotAttack();
+    }
+
+    public void OnDevilButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 12;
+        BotAttack();
+    }
+
+    public void OnLightningButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 13;
+        BotAttack();
+    }
+
+    public void OnGunButton()
+    {
+        combatMenu.SetActive(false);
+        pendingMenu.SetActive(true);
+        playerChoice = 14;
+        BotAttack();
+    }
     public void BotAttack()
     {
-        botChoice = Random.Range(1, 4);
+        botChoice = Random.Range(0, 15);
         Debug.Log(botChoice);
         CheckResults();
     }
 
     public void CheckResults()
     {
-        if(playerChoice == 1 && botChoice == 3 || playerChoice == 2 && botChoice == 1 || playerChoice == 3 && botChoice == 2)
+        for(int i = 0; i < 8; i++)
         {
-            result = 1;
-        } else if(playerChoice == 3 && botChoice == 1 || playerChoice == 1 && botChoice == 2 || playerChoice == 2 && botChoice == 3)
+            if(i + playerChoice < 15)
+            {
+                if(i + playerChoice == botChoice && i == 0)
+                {
+                    result = 2;
+                } else if(i + playerChoice == botChoice)
+                {
+                    result = 1;
+                }
+            }else
+            {
+                if (loop[count] == botChoice)
+                {
+                    result = 1;
+                }
+                count++;
+            }
+        }
+
+        if(result == 3)
         {
             result = 0;
-        } else
-        {
-            result = 2;
         }
+        Invoke("Results", 2.0f);
     }
 
     public void Results()
