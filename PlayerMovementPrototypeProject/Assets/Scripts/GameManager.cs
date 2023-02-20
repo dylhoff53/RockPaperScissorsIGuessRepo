@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject drawMenu;
 
-    public int playerChoice;
+    public Text playerText;
+    public Text botText;
+
+    public int playerChoice = 15;
     public int botChoice;
     public int result = 3;
     public int[] loop;
@@ -36,126 +39,155 @@ public class GameManager : MonoBehaviour
 
     public void OnRockButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 0;
-        BotAttack();
+        LeavingCombat();
     }
     public void OnPaperButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 8;
-        BotAttack();
+        LeavingCombat();
     }
     public void OnScissorsButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 2;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnFireButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 1;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnSnakeButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 3;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnHumanButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 4;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnTreeButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 5;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnWolfButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 6;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnSpongeButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 7;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnAirButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 9;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnWaterButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 10;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnDragonButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 11;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnDevilButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 12;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnLightningButton()
     {
-        combatMenu.SetActive(false);
-        pendingMenu.SetActive(true);
         playerChoice = 13;
-        BotAttack();
+        LeavingCombat();
     }
 
     public void OnGunButton()
     {
+        playerChoice = 14;
+        LeavingCombat();
+    }
+
+    public void LeavingCombat()
+    {
         combatMenu.SetActive(false);
         pendingMenu.SetActive(true);
-        playerChoice = 14;
+        FillText(playerChoice, playerText);
         BotAttack();
     }
     public void BotAttack()
     {
         botChoice = Random.Range(0, 15);
         Debug.Log(botChoice);
+        FillText(botChoice, botText);
         CheckResults();
+    }
+
+    public void FillText(int choice, Text text)
+    {
+        if(choice == 0)
+        {
+            text.text = "Rock";
+        } else if( choice == 1)
+        {
+            text.text = "Fire";
+        } else if (choice == 2)
+        {
+            text.text = "Scissors";
+        } else if (choice == 3)
+        {
+            text.text = "Snake";
+        } else if (choice == 4)
+        {
+            text.text = "Human";
+        } else if (choice == 5)
+        {
+            text.text = "Tree";
+        } else if (choice == 6)
+        {
+            text.text = "Wolf";
+        } else if (choice == 7)
+        {
+            text.text = "Sponge";
+        } else if (choice == 8)
+        {
+            text.text = "Paper";
+        } else if (choice == 9)
+        {
+            text.text = "Air";
+        } else if (choice == 10)
+        {
+            text.text = "Water";
+        } else if (choice == 11)
+        {
+            text.text = "Dragon";
+        } else if (choice == 12)
+        {
+            text.text = "Devil";
+        } else if (choice == 13)
+        {
+            text.text = "Lightning";
+        } else if (choice == 14)
+        {
+            text.text = "Gun";
+        }
     }
 
     public void CheckResults()
