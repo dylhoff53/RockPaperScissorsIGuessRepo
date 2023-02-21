@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
 
     public Text playerText;
     public Text botText;
+    public Text playerTitle;
+    public Text botTitle;
+    public Text mainCombatText;
+    public Text[] fadinTexts;
+
 
     public int playerChoice = 15;
     public int botChoice;
@@ -217,7 +222,27 @@ public class GameManager : MonoBehaviour
         {
             result = 0;
         }
-        Invoke("Results", 2.0f);
+        BeginResults();
+       // Invoke("Results", 2.0f);
+    }
+
+    public void BeginResults()
+    {
+        StartCoroutine(FadeMusic());
+        Invoke("Results", 7f);
+    }
+
+    public void ShowResults(Text text)
+    {
+    }
+
+    IEnumerator FadeMusic()
+    {
+        foreach(Text text in fadinTexts)
+        {
+            text.GetComponent<FadingStuff>().StartFading();
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void Results()
