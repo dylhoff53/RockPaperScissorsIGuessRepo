@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject drawMenu;
+    public GameObject optionsMenu;
 
     public Text playerText;
     public Text botText;
@@ -36,6 +37,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnOptionsMenu()
+    {
+        optionsMenu.SetActive(true);
+        startMenu.SetActive(false);
+    }
+
+    public void OnBackButton()
+    {
+        optionsMenu.SetActive(false);
+        startMenu.SetActive(true);
+    }
     public void OnStartButton()
     {
         startMenu.SetActive(false);
@@ -229,11 +241,13 @@ public class GameManager : MonoBehaviour
     public void BeginResults()
     {
         StartCoroutine(FadeMusic());
+        Invoke("ShowResults", 2f);
         Invoke("Results", 7f);
     }
 
-    public void ShowResults(Text text)
+    public void ShowResults()
     {
+        mainCombatText.GetComponent<FadingStuff>().FadeOut();
     }
 
     IEnumerator FadeMusic()
